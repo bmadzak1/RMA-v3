@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         text = (EditText)findViewById(R.id.editText);
 
         unosi = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, R.layout.element_liste, unosi);
+        adapter = new ArrayAdapter<String>(this, R.layout.element_liste, R.id.Itemname, unosi);
 
         list.setAdapter(adapter);
 
