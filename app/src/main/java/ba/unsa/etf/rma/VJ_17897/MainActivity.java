@@ -18,7 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> unosi;
 
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Muzicar> adapter;
+
+    private static ArrayList<Muzicar> muzicari;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
         list = (ListView)findViewById(R.id.listView);
         text = (EditText)findViewById(R.id.editText);
 
-        unosi = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, R.layout.element_liste, R.id.Itemname, unosi);
+        //unosi = new ArrayList<String>();
+        muzicari = new ArrayList<>();
+        muzicari.add(new Muzicar("ime", "prezime", "zanr", "aa", "sod"));
+
+        adapter = new ArrayAdapter<Muzicar>(this, R.layout.element_liste, R.id.Itemname, muzicari);
 
         list.setAdapter(adapter);
 
