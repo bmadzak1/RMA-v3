@@ -1,8 +1,10 @@
 package ba.unsa.etf.rma.VJ_17897;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,11 +34,24 @@ public class MainActivity extends AppCompatActivity {
 
         //unosi = new ArrayList<String>();
         muzicari = new ArrayList<>();
-        muzicari.add(new Muzicar("ime", "prezime", "zanr", "aa", "sod"));
+        muzicari.add(new Muzicar("ime", "prezime", "zanr", "http://www.google.com", "biografija"));
 
         adapter = new ArrayAdapter<Muzicar>(this, R.layout.element_liste, R.id.Itemname, muzicari);
 
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Intent myIntent = new Intent(MainActivity.this, Detalji.class);
+                myIntent.putExtra("imeAutora", muzicari.get(position).getIme());
+                myIntent.putExtra("prezimeAutora", muzicari.get(position).getPrezime());
+                myIntent.putExtra("zanr", muzicari.get(position).getZanr());
+                myIntent.putExtra("webStranica", muzicari.get(position).getWebStranica());
+                myIntent.putExtra("biografija", muzicari.get(position).getBiografija());
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
 
         dugme.setOnClickListener(new View.OnClickListener(){
             @Override
