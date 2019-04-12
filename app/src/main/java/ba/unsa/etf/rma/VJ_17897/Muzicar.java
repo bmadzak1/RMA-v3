@@ -1,24 +1,23 @@
 package ba.unsa.etf.rma.VJ_17897;
 
-public class Muzicar {
-    private String ime;
-    private String prezime;
-    private String zanr;
-    private String webStranica;
-    private String biografija;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    public Muzicar(String ime, String prezime, String zanr, String webStranica, String biografija) {
+public class Muzicar implements Parcelable {
+    private String ime;
+    private String zanr;
+    private String www;
+
+    public Muzicar(String ime, String zanr, String stranica) {
         this.ime = ime;
-        this.prezime = prezime;
         this.zanr = zanr;
-        this.webStranica = webStranica;
-        this.biografija = biografija;
+        this.www = stranica;
     }
 
     @Override
     public String toString()
     {
-        return ime + " " + prezime + "\n" + zanr;
+        return ime + "\n" + zanr;
     }
 
     public String getIme() {
@@ -29,14 +28,6 @@ public class Muzicar {
         this.ime = ime;
     }
 
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
-
     public String getZanr() {
         return zanr;
     }
@@ -45,19 +36,41 @@ public class Muzicar {
         this.zanr = zanr;
     }
 
-    public String getWebStranica() {
-        return webStranica;
+    public String getWww() {
+        return www;
     }
 
-    public void setWebStranica(String webStranica) {
-        this.webStranica = webStranica;
+    public void setWww(String www) {
+        this.www = www;
     }
 
-    public String getBiografija() {
-        return biografija;
+    protected Muzicar(Parcel in){
+        ime = in.readString();
+        zanr = in.readString();
+        www = in.readString();
     }
 
-    public void setBiografija(String biografija) {
-        this.biografija = biografija;
+    public static final Creator<Muzicar> CREATOR = new Creator<Muzicar>() {
+        @Override
+        public Muzicar createFromParcel(Parcel source) {
+            return new Muzicar(source);
+        }
+
+        @Override
+        public Muzicar[] newArray(int size) {
+            return new Muzicar[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(ime);
+        dest.writeString(zanr);
+        dest.writeString(www);
     }
 }
