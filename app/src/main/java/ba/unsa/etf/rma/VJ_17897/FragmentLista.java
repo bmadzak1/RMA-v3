@@ -1,5 +1,9 @@
 package ba.unsa.etf.rma.VJ_17897;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -43,6 +47,18 @@ public class FragmentLista extends Fragment {
                 }
             });
         }
+
+        ContentResolver cr = getContext().getContentResolver();
+        String[] kolone = new String[]{
+                MuzicarDBOOpenHelper.MUZICAR_ID,
+                MuzicarDBOOpenHelper.MUZICAR_IME,
+                MuzicarDBOOpenHelper.MUZICAR_ZANR
+        };
+        Uri adresa = ContentUris.withAppendedId(Uri.parse("content://rma.provider.muzicari/elements"),1);
+        String where = null;
+        String whereArgs[] = null;
+        String order = null;
+        Cursor cur = cr.query(adresa, kolone, where, whereArgs, order);
     }
 
     public interface OnItemClick{

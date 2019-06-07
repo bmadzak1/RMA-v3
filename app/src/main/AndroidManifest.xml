@@ -17,6 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="rma.provider.muzicari"
+            android:name=".MojProvider">
+        </provider>
     </application>
-
+    
 </manifest>
